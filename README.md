@@ -24,3 +24,6 @@ data.txt
 主函数：
 myRegression： 
     调用这几个模型进行学习（ #1.bayesis Linear regression； #2.normal equation + regularized least squares；#3. least squares with stochastic gradient descent）
+
+
+相关笔记：https://blog.csdn.net/qq_29496135/article/details/81545506
