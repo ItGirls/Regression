@@ -81,7 +81,7 @@ if __name__ == '__main__':
         # measure
         MeasureChoice.rmse(realY, hatY, myDemo.testsNum)
 
-        # #2.normal equeation + regularized least squares
+        # #2.normal equation + regularized least squares
         # mymodel = MLRegression(myDemo.wholeData, myDemo.N,12)
         #
         # mymodel.getDesignMatrix(myDemo.trainsNum, myDemo.tempTrainIndicies,
@@ -100,7 +100,7 @@ if __name__ == '__main__':
         # MeasureChoice.rmse(realY, hatY, myDemo.testsNum)
 
 
-#         #3. least squares with stochastic gradient decent
+#         #3. least squares with stochastic gradient descent
 #         mymodel = MLRegression1(myDemo.wholeData, myDemo.N,10)
 
 #         mymodel.getDesignMatrix(myDemo.trainsNum, myDemo.tempTrainIndicies,
