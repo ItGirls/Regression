@@ -7,11 +7,9 @@
 @Date:2018.8.11 9:45
 @Last modified by:Tingtingzhu 2018.8.11
 """
-# import BasisFunction
 import numpy as np
 import numpy.linalg as LA
 def is_complex(x):
-    # print isinstance(x,complex)
     return not isinstance(x,complex)
 
 class BayesianRegression():
@@ -27,18 +25,18 @@ class BayesianRegression():
     def getDesignMatrix(self,trains, tempTrainIndicies,tempTestIndicies,numberBasis, basisFun):
         '''
 
-        :param DataMat: the whole original data
         :param trains: number of training
+        :param tempTrainIndicies:
+        :param tempTestIndicies:
         :param numberBasis: number of basis function i.e., M(the first is identity function)
         :param basisFun: can be gaussian, sigmoidal or power
         :return:
         '''
-        # 目标
+        # target
         self.wholeT = self.wholedata[:,-1]
-        # 特征
+        # feature extraction
         self.wholeF = np.tile(np.reshape(self.wholedata[:, 0], (self.wholeNum, 1)), (1, numberBasis))
         for j in range(1,numberBasis):
-            #DataMat[:, j] = map(lambda x: np.power(x, 2), DataMat[:, j])
             self.wholeF[:, j] = map(lambda x:basisFun(x,j), self.wholeF[:, j])
 
         self.wholeF[:,0] = 1
@@ -51,8 +49,8 @@ class BayesianRegression():
         self.testData = self.wholeF[tempTestIndicies]
         self.testT = self.wholeT[tempTestIndicies]
 
-        print self.testData
-        print self.testT
+        #print self.testData
+        #print self.testT
 
 
 
@@ -65,10 +63,7 @@ class BayesianRegression():
         self.beta = beta
         self.tempPTP =  np.mat(np.dot(self.data.T,self.data))
         self.lambdaBasis,_ =np.linalg.eig(self.tempPTP)#ARRAY array([,,,...])
-        # print type(self.lambdaBasis)
         self.lambdaBasis = np.array(filter(is_complex,self.lambdaBasis))
-
-        # print type(np.array(self.lambdaBasis))
 
     def esitimateParameters(self,tol=0.001):
         '''
@@ -84,7 +79,6 @@ class BayesianRegression():
             tempBeta = self.beta
 
             #get the real lambda
-            # print type(self.lambdaBasis),'ok'
             tempLambda = self.lambdaBasis*self.beta
 
             #compute gama
@@ -110,8 +104,4 @@ class BayesianRegression():
         self.predictT = np.dot(self.testData,self.mN)
 
 
-    # def error(self):
-    #     temp = np.array(np.reshape(self.predictT-np.reshape(self.testT,(60,1)),(1,60)))[0]
-    #     temp = map(lambda x:np.power(x,2),temp)
-    #     print sum(temp)/60
-    #     pass
+   
