@@ -2,20 +2,24 @@
 # -*-coding:utf-8 -*-
 
 """
+Maximum Likelihood Solution for Linear Regression Model
+Using normal Equation
 @author: Tingtingzhu
 @email:tingtingzhu93@gmail.com
 @Date:2018.8.11 9:45
 @Last modified by:Tingtingzhu 2018.8.11
 """
-# import BasisFunction
+
 import numpy as np
 import numpy.linalg as LA
+
 class MLRegression():
     def __init__(self,dataMat,wholeNum,numberBasis):
         '''
 
         :param dataMat: The whole data
         :param wholeNum: how many datas
+        :param numberBasis: how many basis functions
         '''
         self.wholedata = dataMat
         self.wholeNum = wholeNum
@@ -26,49 +30,42 @@ class MLRegression():
 
     def getDesignMatrix(self,trains, tempTrainIndicies,tempTestIndicies, basisFun):
         '''
-
-        :param DataMat: the whole original data
+        
         :param trains: number of training
-        :param numberBasis: number of basis function i.e., M(the first is identity function)
+        :param tempTrainIndicies:the indicies of the training data
+        :param tempTestIndicies: the indicies of the testing data
         :param basisFun: can be gaussian, sigmoidal or power
         :return:
         '''
-        # 目标
+        # target
         self.wholeT = self.wholedata[:,-1]
-        # 特征
+        # features extraction
         self.wholeF = np.tile(np.reshape(self.wholedata[:, 0], (self.wholeNum, 1)), (1, self.numberBasis))
         for j in range(1,self.numberBasis):
-            #DataMat[:, j] = map(lambda x: np.power(x, 2), DataMat[:, j])
             self.wholeF[:, j] = map(lambda x:basisFun(x,j), self.wholeF[:, j])
 
         self.wholeF[:,0] = 1
 
-        #split train and test features and targets
+        #split train and test & features and targets
+        #train data
         self.N = trains
         self.t = self.wholeT[tempTrainIndicies]
         self.data = self.wholeF[tempTrainIndicies]
-
+        
+        #test data
         self.testData = self.wholeF[tempTestIndicies]
         self.testT = self.wholeT[tempTestIndicies]
 
-        # print self.testData
-        # print self.testT
-
-        print self.t
-        print self.data
-
-
-
     def esitimateParameters(self,mylambda=0):
         '''
-        :param tol:
+        :param mylambda: if not equals 0 then this model is converted to regularized least squares otherwise
+        just Maximum Likelihood or Least squares
         :return:
         '''
         self.wHat =np.dot(np.dot((mylambda*np.eye(self.numberBasis)+np.mat(self.tempPTP)).I,self.data.T),self.t).T
-        # print self.wHat
+        
     def predict(self):
         self.predictT = np.dot(self.testData,self.wHat)
 
-        # self.predictT = np.dot(self.data, self.wHat)
-
+   
 
