@@ -1,5 +1,8 @@
 # Regression
 Practice For PRML(Unit 3 Linear Regression)
+数据：
+data.txt
+
 
 基本共用：
 1）BasisFunction: 
