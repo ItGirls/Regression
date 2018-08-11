@@ -14,6 +14,12 @@ class ErrorMeasure():
         pass
 
     def sse(self,realY,hatY,testNum):
+        '''
+
+        :param realY:type(list)
+        :param hatY:type(list)
+        :return:
+        '''
         tempError = map(lambda x: np.power(x, 2), np.array(realY) - np.array(hatY))
         sumError = sum(tempError)
         print "MSE: %f" % (sumError)
@@ -21,17 +27,21 @@ class ErrorMeasure():
     def mse(self,realY,hatY,testNum):
         '''
 
-        :param realY:list
-        :param hatY:list
+        :param realY:type(list)
+        :param hatY:type(list)
         :return:
         '''
 
         tempError = map(lambda x:np.power(x,2),np.array(realY)-np.array(hatY))
         sumError = sum(tempError)
         print "MSE: %f"%(sumError/testNum*1.0)
-        # print "MSE: %f" % (self.sse(realY,hatY,testNum) / testNum * 1.0)
-
+        
     def rmse(self,realY,hatY,testNum):
+        '''
+        :param realY:type(list)
+        :param hatY:type(list)
+        :return:
+        '''
         tempError = map(lambda x: np.power(x, 2), np.array(realY) - np.array(hatY))
         sumError = sum(tempError)
         mse = sumError / testNum * 1.0
