@@ -1,7 +1,7 @@
 # Regression
 Practice For PRML(Unit 3 Linear Regression)
-数据：
-data.txt
+数据data.txt：
+共两百条，第一列为特征（自变量），第二列为因变量
 
 
 基本共用：
